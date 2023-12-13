@@ -10,6 +10,7 @@ body{
 .container{  
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     max-width: 320px;
     margin: 30px auto;
 }
@@ -37,4 +38,20 @@ body{
     background-color:  #6F4E37;
     color:white;
     cursor: pointer;
+}
+#showing{
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    gap: 10px;
+
+}
+li{
+    font-size: 20px;
+    background-color: #9d7c70;
+    padding: 15px;
+    border-radius: 8px;
+    color:whitesmoke;
+    flex-grow: 1;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
 }
