@@ -52,7 +52,7 @@ body{
 
 }
 li{
-    font-size: 20px;
+    font-size: 30px;
     background-color: #9d7c70;
     padding: 15px;
     border-radius: 8px;
@@ -60,4 +60,22 @@ li{
     margin:5px 20px 0 0;
     flex-grow: 1;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)
+}
+#review{
+    font-size: 30px; 
+    margin: 10px 10px;
+    
+}
+
+#edit{
+    margin: 10px 10px; 
+    background-color: aquamarine; 
+    border-radius: 6px;
+    font-size: 15px;
+}
+#delete{
+    margin: 10px 10px; 
+    background-color:red; 
+    border-radius: 6px;
+    font-size: 15px;
 }

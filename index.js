@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getDatabase,ref,push,onValue,remove} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
+import { getDatabase,ref,push,onValue,remove,set} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
 
 
 
@@ -20,8 +20,17 @@ console.log(app)
 
 addBtn.addEventListener("click",function(){
     const inputValue = inputField.value
-     push(taskInDb,inputValue)
-     clearInput()
+
+    if (inputValue.trim() !== "") {
+        const newTaskRef = push(taskInDb);
+        
+        set(newTaskRef, inputValue);
+
+        clearInput();
+    } else {
+        alert("Kindly add a new task.");
+    }
+    
      
 })
 
@@ -55,9 +64,38 @@ function addTask(item){
     let itemID = item[0]
     let itemValue = item[1]
     let newEl = document.createElement("li")
-    
-    newEl.textContent = itemValue;
-    newEl.addEventListener("dblclick", function() {
+    let checkbox = document.createElement("input")
+    checkbox.type="checkbox"
+    checkbox.id="review"
+
+    newEl.appendChild(checkbox)
+
+    let textValue= document.createElement("span")
+    textValue.textContent = itemValue
+    newEl.appendChild(textValue)
+
+    let editButton = document.createElement("button")
+    editButton.id="edit"
+
+    editButton.textContent = "Edit"
+
+    newEl.appendChild(editButton)
+
+    editButton.addEventListener("click", function() {
+        editTask(itemID, textValue);
+    });
+
+
+
+    let deleteButton = document.createElement("button")
+    deleteButton.id="delete"
+
+    deleteButton.textContent = "🗑️"
+
+    newEl.appendChild(deleteButton)
+
+
+    deleteButton.addEventListener("click", function() {
         let exactLocationOfTaskInDB = ref(db, `tasks/${itemID}`)
         
         remove(exactLocationOfTaskInDB)
@@ -66,4 +104,17 @@ function addTask(item){
 
     
     taskListing.append(newEl)
+}
+
+function editTask(itemID,taskValue){
+    let newTaskValue = prompt("Edit Task:", taskValue.textContent)
+
+    if(newTaskValue !==null){
+        taskValue.textContent = newTaskValue
+        let exactLocationOfTaskInDB = ref(db, `tasks/${itemID}`)
+        
+        set(exactLocationOfTaskInDB,newTaskValue)
+    }
+    
+
 }
