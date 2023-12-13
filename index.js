@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getDatabase,ref,push } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
+import { getDatabase,ref,push,onValue} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
 
 
 
@@ -29,9 +29,20 @@ addBtn.addEventListener("click",function(){
      
 })
 
+onValue(taskInDb,function(snapshort){
+    console.log(snapshort.val()) 
+    let taskArray = Object.values(snapshort.val())
+    console.log(taskArray)
+      clearInput()
+    for(let i=0; i<taskArray.length;i++){
+        let currentTask=taskArray[i]
+        addTask(currentTask)
+    }
+})
+
 
 function clearInput(){
-    inputVal.value= ''
+    inputField.value= ''
 }
 
 function addTask(itemValue){
