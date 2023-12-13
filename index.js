@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getDatabase,ref,push,onValue} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
+import { getDatabase,ref,push,onValue,remove} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
 
 
 
@@ -27,7 +27,7 @@ addBtn.addEventListener("click",function(){
 
 onValue(taskInDb,function(snapshort){
     console.log(snapshort.val()) 
-    let taskArray = Object.values(snapshort.val())
+    let taskArray = Object.entries(snapshort.val())
     console.log(taskArray)
       clearTaskList()
     for(let i=0; i<taskArray.length;i++){
@@ -44,6 +44,20 @@ function clearInput(){
     inputField.value= ''
 }
 
-function addTask(itemValue){
-    taskListing.innerHTML +=`<li> ${itemValue}</li>`
+function addTask(item){
+    //taskListing.innerHTML +=`<li> ${itemValue}</li>`
+    let itemID = item[0]
+    let itemValue = item[1]
+    let newEl = document.createElement("li")
+    
+    newEl.textContent = itemValue;
+    newEl.addEventListener("dblclick", function() {
+        let exactLocationOfTaskInDB = ref(db, `tasks/${itemID}`)
+        
+        remove(exactLocationOfTaskInDB)
+    })
+
+
+    
+    taskListing.append(newEl)
 }
