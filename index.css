@@ -1,0 +1,23 @@
+body{
+    background-color:#d5c1aa;
+    text-align:center;
+    margin: 30px 0 0 0;
+
+}
+#profile{
+    width:400px;
+    height: 250px;
+}
+#add-input{
+    height: 45px;
+    border-radius: 15px;
+    border: 1px solid  #D27D2D;
+    text-align: center;
+
+}
+
+#add-btn{
+    margin: 10px 0 0 0; 
+    padding: 15px 10px;
+    border-radius: 15px;
+}
