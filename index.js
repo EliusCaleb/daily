@@ -27,13 +27,19 @@ addBtn.addEventListener("click",function(){
 
 onValue(taskInDb,function(snapshort){
     console.log(snapshort.val()) 
-    let taskArray = Object.entries(snapshort.val())
-    console.log(taskArray)
-      clearTaskList()
-    for(let i=0; i<taskArray.length;i++){
-        let currentTask=taskArray[i]
-        addTask(currentTask)
+
+    if(snapshort.exists()){
+        let taskArray = Object.entries(snapshort.val())
+        console.log(taskArray)
+          clearTaskList()
+        for(let i=0; i<taskArray.length;i++){
+            let currentTask=taskArray[i]
+            addTask(currentTask)
+        }
+    }else{
+        taskListing.innerHTML = "No tasks Added"
     }
+   
 })
 
 function clearTaskList(){
