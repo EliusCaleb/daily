@@ -20,11 +20,7 @@ console.log(app)
 
 addBtn.addEventListener("click",function(){
     const inputValue = inputField.value
-     console.log(inputValue)
-     console.log(`${inputValue} added to database`)
      push(taskInDb,inputValue)
-
-     addTask(inputValue)
      clearInput()
      
 })
@@ -33,13 +29,16 @@ onValue(taskInDb,function(snapshort){
     console.log(snapshort.val()) 
     let taskArray = Object.values(snapshort.val())
     console.log(taskArray)
-      clearInput()
+      clearTaskList()
     for(let i=0; i<taskArray.length;i++){
         let currentTask=taskArray[i]
         addTask(currentTask)
     }
 })
 
+function clearTaskList(){
+    taskListing.innerHTML =``
+}
 
 function clearInput(){
     inputField.value= ''
